@@ -77,36 +77,36 @@ const CallHistoryList = ({ callHistory }: CallHistoryListProps) => {
   };
 
   return (
-    <div className="space-y-2.5">
+    <div className="max-w-3xl mx-auto space-y-4">
       {callHistory.map((call) => (
-        <div key={call.id} className="border rounded-lg p-4 bg-white shadow-sm hover:shadow-md transition-shadow">
+        <div key={call.id} className="border rounded-lg p-6 bg-card text-card-foreground shadow-sm hover:shadow transition-all">
           <div className="flex gap-4">
             <div className="flex-shrink-0">
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-green-100">
+              <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-100">
                 <CheckIcon />
               </div>
             </div>
 
             <div className="flex-grow">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-start">
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">{call.id}</p>
-                  <p className="text-xs text-gray-500 mt-0.5">{formatDate(call.timestamp)}</p>
+                  <p className="text-base font-semibold">{call.id}</p>
+                  <p className="text-sm text-muted-foreground">{formatDate(call.timestamp)}</p>
                 </div>
                 <Link
                   href={`/history/${call.id}`}
-                  className="box-border inline-flex items-center justify-center gap-1.5 border font-medium transition cursor-pointer [&_*]:cursor-[inherit] focus:outline-none focus-visible:ring disabled:cursor-not-allowed disabled:opacity-70 [&_svg]:opacity-60 ![&_svg]:pointer-events-none data-[icon-only]:shrink-0 rounded-full grow-0 no-underline h-10 px-5 text-base leading-5 data-[icon-only]:w-10 data-[icon-only]:px-0 [&_svg]:size-5 border-border-input bg-transparent hover:bg-background-selected focus-visible:border-border-input-focus focus-visible:bg-background focus-visible:ring-neutral-200/40"
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2"
                 >
-                  <span className="px-2.5 py-1 rounded-full text-xs font-medium">Open</span>
+                  View Details
                 </Link>
               </div>
 
-              <div className="mt-3 flex items-center gap-6">
-                <p className="text-xs text-gray-600 flex items-center gap-1.5">
+              <div className="mt-4 flex items-center gap-6">
+                <p className="text-sm text-muted-foreground flex items-center gap-2">
                   <MessageIcon />
                   {call.events} events
                 </p>
-                <p className="text-xs text-gray-600 flex items-center gap-1.5">
+                <p className="text-sm text-muted-foreground flex items-center gap-2">
                   <TimeIcon />
                   {formatDuration(call.duration)}
                 </p>
