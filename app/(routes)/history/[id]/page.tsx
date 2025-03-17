@@ -15,11 +15,12 @@ interface MessagesProps {
 const Messages = forwardRef<ComponentRef<typeof motion.div>, MessagesProps>(function Messages({ chatDetail }, ref) {
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="max-w-3xl mx-auto space-y-6 p-6">
+      <div className="max-w-2xl mx-auto space-y-6 p-6 my-6 border rounded-lg bg-background shadow-sm">
         <AnimatePresence mode="popLayout">
           {chatDetail?.messageData?.map((msg: any, index: number) => {
             if (msg.type === "USER_MESSAGE" || msg.type === "AGENT_MESSAGE") {
               const isUser = msg.type === "USER_MESSAGE";
+              const isLastMessage = index === chatDetail.messageData.length - 1;
               return (
                 <motion.div
                   ref={index === 0 ? ref : undefined}
@@ -27,7 +28,7 @@ const Messages = forwardRef<ComponentRef<typeof motion.div>, MessagesProps>(func
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.15 }}
-                  className={cn("flex items-start gap-3", isUser ? "flex-row-reverse" : "")}
+                  className={cn("flex items-start gap-3", isUser ? "flex-row-reverse" : "", isLastMessage ? "mb-4" : "")}
                 >
                   <div className={cn("flex-shrink-0", isUser ? "ml-2" : "mr-2")}>
                     {isUser ? (
