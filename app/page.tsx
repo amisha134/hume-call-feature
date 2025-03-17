@@ -1,20 +1,15 @@
-import { getHumeAccessToken } from "@/utils/getHumeAccessToken";
-import dynamic from "next/dynamic";
+"use client";
 
-const Chat = dynamic(() => import("@/components/Chat"), {
-  ssr: false,
-});
+import { useCallHistory } from "@/hooks/useCallHistory";
+import CallHistoryList from "@/components/CallHistoryList";
 
-export default async function Page() {
-  const accessToken = await getHumeAccessToken();
-
-  if (!accessToken) {
-    throw new Error();
-  }
+export default function Home() {
+  const { callHistory } = useCallHistory();
 
   return (
-    <div className={"grow flex flex-col"}>
-      <Chat accessToken={accessToken} />
-    </div>
+    <main className="container mx-auto p-4 max-w-2xl">
+      <h1 className="text-2xl font-bold mb-6">Call History</h1>
+      <CallHistoryList callHistory={callHistory} />
+    </main>
   );
 }

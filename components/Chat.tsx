@@ -6,20 +6,14 @@ import Controls from "./Controls";
 import StartCall from "./StartCall";
 import { ComponentRef, useRef } from "react";
 
-export default function ClientComponent({
-  accessToken,
-}: {
-  accessToken: string;
-}) {
+export default function ClientComponent({ accessToken }: { accessToken: string }) {
   const timeout = useRef<number | null>(null);
   const ref = useRef<ComponentRef<typeof Messages> | null>(null);
-  
+
+  console.log("messagemessage", ref);
+
   return (
-    <div
-      className={
-        "relative grow flex flex-col mx-auto w-full overflow-hidden h-[0px]"
-      }
-    >
+    <div className={"relative grow flex flex-col mx-auto w-full overflow-hidden h-[100%]"}>
       <VoiceProvider
         auth={{ type: "accessToken", value: accessToken }}
         onMessage={() => {
@@ -38,7 +32,6 @@ export default function ClientComponent({
             }
           }, 200);
         }}
-        
       >
         <Messages ref={ref} />
         <Controls />
